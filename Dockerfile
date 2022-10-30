@@ -14,7 +14,6 @@ RUN python3 -m venv $POETRY_VENV \
 
 # Add `poetry` to PATH
 ENV PATH="${PATH}:${POETRY_VENV}/bin"
-
 WORKDIR /app
 
 # Install dependencies
@@ -22,5 +21,4 @@ COPY poetry.lock pyproject.toml ./
 RUN poetry install
 
 # Run your app
-COPY . /app
-CMD [ "poetry", "run", "python", "-c", "print('Hello, World!')" ]
+CMD [ "poetry", "run", "battlemap" ]
