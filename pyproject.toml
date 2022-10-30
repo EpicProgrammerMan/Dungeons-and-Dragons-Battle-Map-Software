@@ -10,7 +10,9 @@ python = "^3.8"
 pyglet = "^1.5.27"
 flask = "^2.2.2"
 
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+"battlemap" = 'battlemap.app:main'
