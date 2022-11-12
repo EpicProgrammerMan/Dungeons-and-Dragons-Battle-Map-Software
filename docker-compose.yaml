@@ -2,9 +2,17 @@ version: "3.7"
 
 services:
   battlemap:
+    image: 'postgres:latest'
     build:
       context: ./
     ports:
-      - 5000:5000
+      - 5432:5432
     volumes:
       - ./battlemap:/app/battlemap
+    environment:
+      POSTGRES_USER: username # The PostgreSQL user (useful to connect to the database)
+      POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
+      POSTGRES_DB: default_database # The PostgreSQL default database (automatically created at first launch)
+
+
+# https://herewecode.io/blog/create-a-postgresql-database-using-docker-compose/
