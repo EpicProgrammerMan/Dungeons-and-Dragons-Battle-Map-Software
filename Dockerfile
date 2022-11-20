@@ -1,6 +1,10 @@
 # put the name of the python.exe file here
 FROM python
 
+# Most of the things that happen in the docker file happen in the build phase.
+# If you change things in the docker file you have to rebuild the docker container.
+# The only stuff that happens in run phase is CMD and ENTRYPOINT.
+
 # Configure Poetry
 ENV POETRY_VERSION=1.2.0
 ENV POETRY_HOME=/opt/poetry
