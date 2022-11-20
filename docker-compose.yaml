@@ -37,6 +37,8 @@ services:
       POSTGRES_PASSWORD: battlemap
       POSTGRES_USER: battlemap
       PGDATA: /data
+      # Creates database on startup.
+      POSTGRES_DB: battlemap
 
   # Use this URL to get to pgadmin: http://localhost:8000/browser/
   pgadmin:

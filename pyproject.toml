@@ -7,8 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pyglet = "^1.5.27"
 flask = "^2.2.2"
+alembic = "^1.8.1"
 
 [build-system]
 requires = ["poetry-core"]
