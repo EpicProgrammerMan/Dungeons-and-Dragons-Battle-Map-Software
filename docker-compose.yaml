@@ -1,26 +1,61 @@
 version: "3.7"
 
+x-config:
+  &default-config
+  # Stuff here applies to all other ones
+  networks:
+    - default
+
 services:
   battlemap:
-    image: 'postgres:latest'
+    <<: *default-config
     build:
       context: ./
-    ports:
-      - 5432:5432
     volumes:
       - ./battlemap:/app/battlemap
     environment:
       POSTGRES_USER: battlemap # The PostgreSQL user (useful to connect to the database)
       POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
       POSTGRES_DB: battlemap # The PostgreSQL default database (automatically created at first launch)
+  
+  postgres:
+    <<: *default-config
+    build:
+      context: services/postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/data
+    environment:
+      PGPASSWORD: battlemap
+      POSTGRES_PASSWORD: battlemap
+      POSTGRES_USER: battlemap
+      PGDATA: /data
 
   pgadmin:
+    <<: *default-config
     image: 'dpage/pgadmin4:latest'
     ports:
-      - 8081:80
+      - 8000:80
+    depends_on:
+      - postgres
     environment:
       PGADMIN_DEFAULT_EMAIL: blakelehrbass@gmail.com
       PGADMIN_DEFAULT_PASSWORD: epicpassword
     
+  schemaspy:
+    <<: *default-config
+    image: schemaspy/schemaspy:latest
+    depends_on:
+      - postgres
+    ports:
+      - 8001:8000
+    user: root
+    volumes:
+      - ./services/schemaspy/schemaspy.properties:/schemaspy.properties
+      - ./schemaspy:/output
 
 # https://herewecode.io/blog/create-a-postgresql-database-using-docker-compose/
+
+volumes:
+  postgres_data:
