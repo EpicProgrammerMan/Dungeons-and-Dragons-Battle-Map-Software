@@ -13,9 +13,15 @@ services:
     <<: *default-config
     build:
       context: ./
+    ports:
+      - 8002:5000
     volumes:
       # This is the source code that the application uses.
       - ./battlemap:/app/battlemap
+      # Mount the alembic configuration.
+      - ./alembic.ini:/app/alembic.ini
+      - ./alembic:/app/alembic
+    user: root
     environment:
       # These variables are used by the application to log into postgres.
       POSTGRES_USER: battlemap # The PostgreSQL user (useful to connect to the database)
