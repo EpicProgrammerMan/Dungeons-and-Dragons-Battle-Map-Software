@@ -1,5 +1,6 @@
 FROM postgres:13
 
+# CMD is run when the docker container starts.
 CMD [ \
   "postgres", \
   "-c", "log_statement=all",\

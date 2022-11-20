@@ -2,18 +2,22 @@ version: "3.7"
 
 x-config:
   &default-config
-  # Stuff here applies to all other ones
+  # Stuff here applies to all other services.
+  # A default network is added so that services can communicate with each other on the same network.
   networks:
     - default
 
 services:
+  # This is the application.
   battlemap:
     <<: *default-config
     build:
       context: ./
     volumes:
+      # This is the source code that the application uses.
       - ./battlemap:/app/battlemap
     environment:
+      # These variables are used by the application to log into postgres.
       POSTGRES_USER: battlemap # The PostgreSQL user (useful to connect to the database)
       POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
       POSTGRES_DB: battlemap # The PostgreSQL default database (automatically created at first launch)
@@ -25,13 +29,16 @@ services:
     ports:
       - 5432:5432
     volumes:
+      # This is where the database data is stored.
       - postgres_data:/data
     environment:
+      # These variables tell the server what the username and password are for the postgres database.
       PGPASSWORD: battlemap
       POSTGRES_PASSWORD: battlemap
       POSTGRES_USER: battlemap
       PGDATA: /data
 
+  # Use this URL to get to pgadmin: http://localhost:8000/browser/
   pgadmin:
     <<: *default-config
     image: 'dpage/pgadmin4:latest'
@@ -40,6 +47,7 @@ services:
     depends_on:
       - postgres
     environment:
+      # These variables are used to access the postgres client.
       PGADMIN_DEFAULT_EMAIL: blakelehrbass@gmail.com
       PGADMIN_DEFAULT_PASSWORD: epicpassword
     
