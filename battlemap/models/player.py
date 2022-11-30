@@ -1,9 +1,7 @@
 from datetime import datetime
 from sqlalchemy import Column, DateTime, Integer, String, create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
-
-Base = declarative_base()
-
+from sqlalchemy.orm import sessionmaker
+from battlemap.models.base import Base
 
 # Creates a simple SQLalchemy model
 # All users will have a PlayerModel, which contains various information about them
