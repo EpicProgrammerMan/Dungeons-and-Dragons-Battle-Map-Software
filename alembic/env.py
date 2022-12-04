@@ -16,8 +16,9 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-from battlemap.models.base import Base
-from battlemap.models import *
+from battlemap.models.database import Base
+from battlemap.models import init_db
+init_db()
 target_metadata = Base.metadata
 # target_metadata = None
 

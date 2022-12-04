@@ -3,7 +3,7 @@ from sqlalchemy import Column, DateTime, Integer, String, create_engine
 from sqlalchemy.orm import sessionmaker
 # The base.py file is the root of the inheritance tree
 # Every model build off of base.py inherits from what is in it
-from battlemap.models.base import Base
+from battlemap.models.database import Base
 
 # Creates a simple SQLalchemy model
 # All users will have a PlayerModel, which contains various information about them
