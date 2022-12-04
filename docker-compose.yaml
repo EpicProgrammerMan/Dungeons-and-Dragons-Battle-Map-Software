@@ -24,9 +24,12 @@ services:
     user: root
     environment:
       # These variables are used by the application to log into postgres.
+      # This should be the same as what is in the postgres section.
       POSTGRES_USER: battlemap # The PostgreSQL user (useful to connect to the database)
-      POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
+      POSTGRES_PASSWORD: battlemap # The PostgreSQL password (useful to connect to the database)
       POSTGRES_DB: battlemap # The PostgreSQL default database (automatically created at first launch)
+      POSTGRES_PORT: 5432
+      POSTGRES_HOST: postgres
   
   postgres:
     <<: *default-config
