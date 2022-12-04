@@ -16,4 +16,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-"battlemap" = 'battlemap.app:main'
+"battlemap" = 'battlemap.main:main'
