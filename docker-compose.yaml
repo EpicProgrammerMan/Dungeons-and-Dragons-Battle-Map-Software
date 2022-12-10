@@ -21,6 +21,7 @@ services:
       # Mount the alembic configuration.
       - ./alembic.ini:/app/alembic.ini
       - ./alembic:/app/alembic
+      - ./tests:/app/tests
     user: root
     environment:
       # These variables are used by the application to log into postgres.

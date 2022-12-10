@@ -22,7 +22,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY poetry.lock pyproject.toml ./
-RUN poetry install
+RUN poetry install --with=dev
 
 # Run your app
 CMD [ "poetry", "run", "battlemap" ]
