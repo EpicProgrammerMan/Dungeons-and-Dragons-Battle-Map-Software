@@ -2,13 +2,24 @@ from battlemap.views.app import app
 from battlemap.models.database import db_session
 from battlemap.models.players import PlayerModel
 from flask import request, jsonify
-# 3 ways to get data from request object.
-# Anything after "?" is a query string.
+from battlemap.models.database import Base
+from sqlalchemy import select
 
 @app.route('/players', methods=['GET'])
 def get_players():
     """ Returns a list of players. """
-    return 'Get players called'
+    
+    # Gets a list of players from the database.
+    stmt = select(PlayerModel)
+    response = db_session.execute(stmt).fetchall()
+
+    def response_dict(r):
+        return dict(zip(r.keys(), r))
+
+    def response_dicts(rs): 
+        return list(map(response_dict, rs))
+
+    return response_dicts(response)
 
 @app.route('/players', methods=['PUT'])
 def create_player():
@@ -28,6 +39,3 @@ def create_player():
         'player_created': player.created,
     }
     return jsonify(response)
-
-    # HOMEWORK!!!!
-    # FINISH THE REST OF THE APIs USING SQLALCHEMY!!!!!!!
