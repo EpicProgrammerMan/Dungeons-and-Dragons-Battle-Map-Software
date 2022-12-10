@@ -21,8 +21,12 @@ ENV PATH="${PATH}:${POETRY_VENV}/bin"
 WORKDIR /app
 
 # Install dependencies
-COPY poetry.lock pyproject.toml ./
-RUN poetry install --with=dev
+COPY poetry.lock pyproject.toml battlemap ./
+RUN python -m pip install --upgrade pip
+# RUN poetry install --with=dev
+RUN poetry export --with=dev -f requirements.txt --output requirements.txt
+RUN python -m pip install -r requirements.txt
 
 # Run your app
-CMD [ "poetry", "run", "battlemap" ]
+# CMD [ "battlemap" ]
+CMD [ "python", "-c", "from battlemap.main import main; main()" ]
