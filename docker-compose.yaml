@@ -31,6 +31,7 @@ services:
       POSTGRES_DB: battlemap # The PostgreSQL default database (automatically created at first launch)
       POSTGRES_PORT: 5432
       POSTGRES_HOST: postgres
+      PYTHONPATH: /app
     stdin_open: true
     tty: true
   

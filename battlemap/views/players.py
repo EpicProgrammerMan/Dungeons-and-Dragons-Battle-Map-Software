@@ -1,7 +1,7 @@
 from battlemap.views.app import app
 from battlemap.models.database import db_session
 from battlemap.models.players import PlayerModel
-from flask import request, jsonify
+from flask import request, jsonify, json
 from battlemap.models.database import Base
 from sqlalchemy import select
 
@@ -11,15 +11,15 @@ def get_players():
     
     # Gets a list of players from the database.
     stmt = select(PlayerModel)
-    response = db_session.execute(stmt).fetchall()
+    response = db_session.query(PlayerModel).all()
 
-    def response_dict(r):
-        return dict(zip(r.keys(), r))
+    # return response
+    mylist = []
 
-    def response_dicts(rs): 
-        return list(map(response_dict, rs))
+    for i in response:
+        mylist.append(i.__get__())
 
-    return response_dicts(response)
+    return mylist
 
 @app.route('/players', methods=['PUT'])
 def create_player():

@@ -7,6 +7,7 @@ from sqlalchemy import select
 
 @app.route('/player/<player_id>', methods=['GET'])
 def get_player(player_id):
+    breakpoint()
     """ Returns the details of a specified player. """
 
     # Gets a single player from the database using its player id.

@@ -15,7 +15,15 @@ class PlayerModel(Base):
     created = Column(DateTime, default=datetime.utcnow)
 
     def __repr__(self):
+        breakpoint()
         return (
             f'PlayerModel(id={self.id}, name={self.name},'
             f'created={self.created})'
         )
+    
+    def __get__(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'created': self.created
+        }
