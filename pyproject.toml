@@ -2,8 +2,7 @@
 name = "battlemap"
 version = "0.1.0"
 description = ""
-authors = ["Blake blakelehrbass@gmail.com"]
-readme = "README.md"
+authors = ["Blake <blakelehrbass@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -11,9 +10,12 @@ flask = "^2.2.2"
 alembic = "^1.8.1"
 psycopg2-binary = "^2.9.5"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-"battlemap" = 'battlemap.app:main'
+"battlemap" = 'battlemap.main:main'
