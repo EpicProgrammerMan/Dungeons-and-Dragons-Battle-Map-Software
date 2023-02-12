@@ -30,3 +30,5 @@ def clean_data(db_session):
     stmt = delete(PlayerModel)
     db_session.execute(stmt)
     db_session.commit()
+# Create util that can easily make a request
+# Create util that will create player

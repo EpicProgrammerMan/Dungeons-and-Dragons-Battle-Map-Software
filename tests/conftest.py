@@ -1,4 +1,4 @@
-from utils import setup_database, clean_data
+from utils.database import setup_database, clean_data
 import pytest
 from battlemap.models.players import PlayerModel
 from sqlalchemy import delete
