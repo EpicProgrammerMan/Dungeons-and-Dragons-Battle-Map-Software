@@ -5,4 +5,4 @@ def init_db():
     from battlemap.models.database import engine, Base
     from battlemap.models.players import PlayerModel
     from battlemap.models.enemies import EnemyModel
-    Base.metadata.create_all(bind=engine)
+    return Base.metadata
