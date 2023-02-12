@@ -12,6 +12,7 @@ def get_players():
     # Gets a list of players from the database.
     stmt = select(PlayerModel)
     response = db_session.query(PlayerModel).all()
+    db_session.commit()
 
     # return response
     mylist = []

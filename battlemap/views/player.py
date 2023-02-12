@@ -13,6 +13,7 @@ def get_player(player_id):
     # Gets a single player from the database using its player id.
     stmt = select(PlayerModel).where(PlayerModel.id==player_id)
     player = db_session.execute(stmt).first()[0]
+    db_session.commit()
 
     # Must convert player object into string.
     response = {
@@ -24,11 +25,12 @@ def get_player(player_id):
 
 @app.route('/player/<player_id>', methods=['GET', 'POST'])
 def update_player(player_id):
-    """ Creates a new player. """
+    """ Changes the name of a player. """
 
     newName = request.json['name']
 
     stmt = (update(PlayerModel).where(PlayerModel.id == player_id).values(name=newName))
     db_session.execute(stmt)
+    db_session.commit()
 
     return f'Update player called with {player_id}, set new name to be {newName}'
