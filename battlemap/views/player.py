@@ -4,6 +4,7 @@ from battlemap.models.players import PlayerModel
 from flask import request, jsonify
 from battlemap.models.database import Base
 from sqlalchemy import select
+from sqlalchemy import update
 
 @app.route('/player/<player_id>', methods=['GET'])
 def get_player(player_id):
@@ -21,27 +22,13 @@ def get_player(player_id):
     }
     return jsonify(response)
 
-# Updated to add "GET" before "POST"
 @app.route('/player/<player_id>', methods=['GET', 'POST'])
 def update_player(player_id):
-    # I swear I updated this but it has changed back. Hmmm
     """ Creates a new player. """
 
-    # The POST method is meant to change something about the player.
-    # Lets change its name.
     newName = request.json['name']
 
-    # Gets player from database whose id is the same as the id requested.
-    stmt = select(PlayerModel).where(PlayerModel.id==player_id)
-
-    player = db_session.execute(stmt).first()[0]
-    
-    player.name = newName
-
-    # Now has to put the player back into the database apparently.
-    # This doesn't work here, I want to replace one of the items
-    # in the database. Not add a new one at the end.
-    db_session.add(player)
-    db_session.commit()
+    stmt = (update(PlayerModel).where(PlayerModel.id == player_id).values(name=newName))
+    db_session.execute(stmt)
 
     return f'Update player called with {player_id}, set new name to be {newName}'
