@@ -1,7 +1,6 @@
 from battlemap.views.app import app
-from battlemap.views import init_api
-init_api()
 import pytest
+from tests.utils.api import request
 
 # https://circleci.com/blog/testing-flask-framework-with-pytest/
 
@@ -14,7 +13,4 @@ TEST = [
        ]
 @pytest.mark.parametrize('requestType, endpoint, dataInput', TEST)
 def test_flask(cleanup, requestType, endpoint, dataInput):
-    headers = { "Content-Type": "application/json" }
-    method = getattr(app.test_client(), requestType)
-    response = method( endpoint, headers=headers, data=dataInput )
-    assert response.status_code == 200
+    assert request(requestType, endpoint, dataInput).status_code == 200
